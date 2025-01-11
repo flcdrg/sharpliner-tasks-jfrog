@@ -6,7 +6,6 @@
       command: Upload
       connection: serviceConnection
       specSource: taskConfiguration
-      collectBuildInfo: true
       fileSpec: |-
         {
                 "files": [
@@ -16,6 +15,7 @@
                   }
                 ]
               }
+      collectBuildInfo: true
       buildName: ThisBuild
       buildNumber: 1.0.0
       replaceSpecVars: true

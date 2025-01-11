@@ -5,5 +5,5 @@
     inputs:
       command: Upload
       connection: serviceConnection
-      specSource: taskConfiguration
-      fileSpec: fileSpec
+      specSource: file
+      file: file
