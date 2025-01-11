@@ -24,7 +24,7 @@ updates:
           - "*" # Prefer a single PR per solution update.
 
   - package-ecosystem: "dotnet-sdk"
-    directory: "/src"
+    directory: "/"
     schedule:
       interval: "weekly"
       day: "wednesday"
