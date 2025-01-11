@@ -13,9 +13,17 @@ jobs:
     permissions:
       checks: write
       pull-requests: write
+      packages: write
+
+    env:
+      Configuration: Release
+      RepositoryUrl: https://github.com/${{ github.repository }}
+      source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -26,7 +34,7 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build --no-restore -p:RepositoryUrl=${{ env.RepositoryUrl }} /bl
 
       - name: Test
         run: dotnet test --no-build --verbosity normal --logger trx
@@ -36,3 +44,7 @@ jobs:
         if: always()
         with:
           trx_files: "${{ github.workspace }}/**/*.trx"
+
+      - name: Publish the package to GPR
+        run: dotnet nuget push "src/Tasks/bin/Release/*.nupkg" --source ${{ env.source-url }} -k ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+        if: github.ref == 'refs/heads/main'
