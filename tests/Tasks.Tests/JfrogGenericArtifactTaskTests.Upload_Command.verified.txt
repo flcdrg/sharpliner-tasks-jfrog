@@ -5,4 +5,4 @@
     inputs:
       command: Upload
       connection: serviceConnection
-      workingDirectory: {TempPath}
+      specSource: taskConfiguration
