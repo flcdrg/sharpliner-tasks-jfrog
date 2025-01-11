@@ -5,4 +5,4 @@
     inputs:
       command: Upload
       connection: serviceConnection
-      workingDirectory: /tmp
+      workingDirectory: {TempPath}

@@ -23,7 +23,7 @@ public class JfrogGenericArtifactTaskTests
     {
         var task = _builder.Upload("serviceConnection") with
         {
-            WorkingDirectory = "/tmp"
+            WorkingDirectory = Path.GetTempPath()
         };
 
         return Verify(GetYaml(task));
