@@ -45,6 +45,9 @@ jobs:
         with:
           trx_files: "${{ github.workspace }}/**/*.trx"
 
+      - name: Pack
+        run: dotnet pack --no-build -p:RepositoryUrl=${{ env.RepositoryUrl }}
+
       - name: Publish the package to GPR
         run: dotnet nuget push "src/Tasks/bin/Release/*.nupkg" --source ${{ env.source-url }} -k ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
         if: github.ref == 'refs/heads/main'
